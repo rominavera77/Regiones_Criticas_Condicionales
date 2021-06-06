@@ -4,19 +4,8 @@ import random
 import time
 from regionCondicional import *
 
-
 logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(threadName)s] - %(message)s', datefmt='%H:%M:%S', level=logging.INFO)
 
-# Sin espera ocupada:
-"""
-count = 0  # - numero de procesos bloqueados en la cola de eventos
-temp = 0  # - cuantos procesos han reevaluado la condicion
-B = True
-mutex = threading.Semaphore(1)   #-- cola principal
-wait = threading.Semaphore(0) #--- cola de eventos
-"""
-
-# region r when B do S;
 
 class Recurso1(Recurso):
     elementos = []
