@@ -1,6 +1,6 @@
 # Regiones Críticas Condicionales
 
-La programación concurrente consiste en controlar (Al acceder a las Secciones Críticas):
+La programación concurrente consiste en controlar (al acceder a las Secciones Críticas):
 
  - **Exclusión Mutua** 
  - **Condición de Sincronización**
