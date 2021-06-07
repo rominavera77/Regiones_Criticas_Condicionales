@@ -39,7 +39,8 @@ Para asegurar el acceso y uso correcto de las Variables Compartidas, las mismas 
 ## Región
 Las variables definidas en recursos se tienen que acceder de una forma especial, utilizando la construcción ***region*** (región)
 
-> **region** <id_recurso> **do**
+> **region** <id_recurso> **do*
+> 
 > **begin**
 >
 > >Operaciones con las variable que pertenecen al recurso **id_recurso**
