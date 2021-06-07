@@ -1,5 +1,5 @@
 import threading
-import logging
+
 """ 
 Este módulo implementa clases para instanciar Regiones Críticas y Regiones Críticas Condicionales
 para implementar soluciones que requieren Exclusión Mútua y Condiciones de Sincronización.

@@ -122,10 +122,28 @@ En el repositorio hay un ejemplo de implementación de Regiones Críticas Condic
 
 ## Ejercicios:
 
-1. Implementar la solución del siguiente problema de Lectores/Escritor utilizando las clases del módulo RegionCondicional
+### Ejercicio 1
+Implementar la solución del siguiente problema de Lectores/Escritor utilizando las clases del módulo ***RegionCondicional***:
 
-2. Implementar el ejercicio 2, pero dando prioridad a los escritores.
+- Lectores y Escritores acceden todos a una variable ***datos1***.
+- Cuando un escritor tiene acceso a ***datos1***, le carga un valor entero aleatorio entre 0 y 100 .
+- Cuando un lector tiene acceso a ***datos1*** , imprime el valor que leyó.
+- Los **escritores** deben acceder a ***datos1*** con exclusión mútua y **solo si no hay lectores leyendo.** (prioridad de lectura).
+- Los lectores tienen acceso simultáneo a ***datos1*** y no necesitan exclusión mútua entre ellos al leer esta variable. Además tienen prioridad sobre los escritores. Si un escritor quiere acceder a ***datos1*** tiene que esperar a que todos los lectores hayan terminado de leer.
+- Para asegurar la prioridad, se utiliza una variable ***numLectores***, que cuenta la cantidad de lectores leyendo ***datos1***. Los lectores si necesitan acceder con exclusión mutua a ***numLectores.***
 
-3. Resolver el problema de los filósofos cenando.
+Nota: El módulo ***RegionCondicional***, incluye también las clase ***Region*** para implementar regiones no condicionales.
 
+El siguiente archivo tiene el esqueleto de la solución, pero sin control de concurrencia (si bien se ejecuta, su salida es totalmente inconsistente por que no se controlan el acceso a las secciones críticas ni las condiciones de sincronización:
 
+    Ejercicio1.py
+
+**Nota:** respetar los retardos (sleep) colocados, ya que fueron elegidos para minimizar condiciones de inanición.
+
+Algunas Pistas:
+
+- El lector tiene prioridad sobre el escritor, por lo que no necesita comprobar ninguna condición de sincronización para acceder a la región, solo necesita asegurar la exclusión mutua. Esto equivale a decir que la condición del Lector es siempre verdadera.
+- Por otro lado los escritores antes de acceder a la región tienen que comprobar que no haya lectores leyendo (numLectores = 0).
+- En el esqueleto las variables compartidas (datos1 y numLectores) están declaradas como globales. Es recomendable que modifiquen el código, reemplazandolas por variables instanciadas en una clase derivada de Recurso.
+- Los lectores no tienen que controlar exclusion mútua a datos1, pero si a numLectores, por lo tanto los accesos de los lectores a datos1 tienen que estar fuera de las regiones de los lectores.
+ 

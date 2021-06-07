@@ -47,5 +47,4 @@ def Consumidor():
 threading.Thread(target=Productor, daemon=True).start()
 threading.Thread(target=Consumidor, daemon=True).start()
 
-while True:
-    pass
+time.sleep(300)
