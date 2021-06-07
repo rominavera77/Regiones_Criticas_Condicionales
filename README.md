@@ -146,4 +146,20 @@ Algunas Pistas:
 - Por otro lado los escritores antes de acceder a la región tienen que comprobar que no haya lectores leyendo (numLectores = 0).
 - En el esqueleto las variables compartidas (datos1 y numLectores) están declaradas como globales. Es recomendable que modifiquen el código, reemplazandolas por variables instanciadas en una clase derivada de Recurso.
 - Los lectores no tienen que controlar exclusion mútua a datos1, pero si a numLectores, por lo tanto los accesos de los lectores a datos1 tienen que estar fuera de las regiones de los lectores.
+
+
+### Ejercicio 2
+Implementar la solución al Ejercicio 1 pero dando prioridad a los Escritores.
+- Lectores y Escritores acceden todos a una variable ***datos1***.
+- Cuando un escritor tiene acceso a ***datos1***, le carga un valor entero aleatorio entre 0 y 100 .
+- Cuando un lector tiene acceso a ***datos1*** , imprime el valor que leyó.
+- Los **escritores** deben acceder a ***datos1*** con exclusión mútua.
+- Los lectores tienen acceso simultáneo a ***datos1*** y no necesitan exclusión mútua entre ellos al leer esta variable.
+- Los escritores tienen prioridad sobre los lectores. Si un lector quiere acceder a ***datos1*** tiene que esperar a que todos los escritores hayan terminado.
+
+
+### Ejercicio 3
+Implementar la solución al problema de los filósofos cenando utilizando las clases del módulo ***RegionCondicional***
+- Los tenedores se pueden representar con un array o lista ***tenedores*** de valores booleanos y cada filósofo comprobar que están libres los tenedores [i] e [i + 1].
+
  
