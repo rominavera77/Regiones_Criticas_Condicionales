@@ -60,7 +60,7 @@ Ejemplo:
 - Todo lo que se ejecuta dentro de la región, se ejecuta en **exclusión mutua**.
 - Si un proceso quiere ejecutar una región, y está libre, procede a ejecutarla, si está ocupada, se bloquea y se coloca en la **cola principal**.
 - Hay una cola principal por **recurso**. Si hay n regiones asociadas al mismo recurso, todas los procesos que se bloquean al intentar accederlas se colocan en la cola principal del recurso.
-- Este esquema, sólo resuelve en forma estructurada la **Exclusión Mutua**
+- Este esquema resuelve en forma estructurada la **Exclusión Mutua** únicamente.
 
 ## Implementación en Python
 
