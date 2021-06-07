@@ -65,6 +65,7 @@ Ejemplo:
 ## Implementación en Python
 
 En el presente repositorio se encuentran los ejemplos de implementación que vimos durante la clase del 4/4:
+
 1 - Implementación utilizando una función ***decorator*** y los recursos como variables globales
 
     RegionCritica1.py
