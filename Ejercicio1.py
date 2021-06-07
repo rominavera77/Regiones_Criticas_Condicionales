@@ -17,7 +17,7 @@ def Lector():
         logging.info(f'Lector lee dato1 = {dato1}')
         time.sleep(1)
         numLectores -= 1
-        time.sleep(random.randint(1,2))
+        time.sleep(random.randint(3,6))
 
 def Escritor():
     global dato1
@@ -25,12 +25,12 @@ def Escritor():
         if numLectores == 0:
             dato1 = random.randint(0,100)
             logging.info(f'Escritor escribe dato1 = {dato1}')
-        time.sleep(5)
+        time.sleep(random.randint(1,4))
 
 
 def main():
     nlector = 10
-    nescritor = 1
+    nescritor = 2
 
     for k in range(nlector):
         threading.Thread(target=Lector, daemon=True).start()
