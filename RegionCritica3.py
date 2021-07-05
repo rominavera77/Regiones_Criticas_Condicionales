@@ -17,12 +17,12 @@ class recurso():
     variable2 = 0
 
 class region(object):
-    resource = recurso()
+    resource = recurso()        # dentro de la clase instancio un recurso
     lock = threading.Lock()
-    def __init__(self, do):
+    def __init__(self, do):     # al constructor le paso la función que voy a decorar
         self._do = do
 
-    def __call__(self):
+    def __call__(self):         # devuelve todo como un ejecutable
         with region.lock:
             self._do()
 

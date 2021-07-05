@@ -5,7 +5,7 @@ import contextlib
 
 logging.basicConfig(format='%(asctime)s.%(msecs)03d [%(threadName)s] - %(message)s', datefmt='%H:%M:%S', level=logging.INFO)
 
-# Recurso
+# Recurso -> Variables globales
 variable1 = 0
 variable2 = 0
 lock=threading.Lock()
@@ -18,7 +18,7 @@ lock=threading.Lock()
 def region(do):
     global lock
     def wrapper():
-        with lock:
+        with lock:       # with aquiere el lock y lo libera
          #   logging.info(f'{lock}, {lock.locked()}')
             do()
        # logging.info(f'{lock}, {lock.locked()}')

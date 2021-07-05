@@ -101,10 +101,10 @@ class Recurso(object):
 
     '''
     def __init__(self):
-        self.mutex = threading.Semaphore(1)
-        self.wait = threading.Semaphore(0)
-        self.count = 0
-        self.temp = 0
+        self.mutex = threading.Semaphore(1)     # da la EXCLUSION MUTUA -> COLA PRINCIPAL
+        self.wait = threading.Semaphore(0)      # COLA DE EVENTOS -> se duerme el proceso para esperar que otro lo despierte
+        self.count = 0                          # cuenta los procesos en la COLA DE EVENTOS
+        self.temp = 0                           # cuenta cuantos procesos han reevaluado la condición
 
 # Region Crítica (no condicional)
 class RegionCondicional():
@@ -165,25 +165,25 @@ class RegionCondicional():
 
     def condicion(self, do):
         def wrapper():
-            self.recurso.mutex.acquire()
-            if not(self.condition()):
-                self.recurso.count += 1
-                self.recurso.mutex.release()
-                self.recurso.wait.acquire()
-                while not(self.condition()):
-                    self.recurso.temp += 1
-                    if self.recurso.temp < self.recurso.count:
+            self.recurso.mutex.acquire()        #pide le lock
+            if not(self.condition()):           # si la condición no se cumple 
+                self.recurso.count += 1         # suma 1 al contador de los procesos en la COLA DE EVENTOS
+                self.recurso.mutex.release()    #libera el lock de la COLA PRINCIPAL
+                self.recurso.wait.acquire()     #hace un acquire del semáforo en 0 y se duerme
+                while not(self.condition()):    # mientras que no se cumpla la condición 
+                    self.recurso.temp += 1      #suma 1 al contador de los procesos que evaluaron la condición
+                    if self.recurso.temp < self.recurso.count:  #
                         self.recurso.wait.release()
                     else:
-                        self.recurso.mutex.release()
+                        self.recurso.mutex.release()    #libera el lock y se vuelve a dormir
                     self.recurso.wait.acquire()
                 self.recurso.count = self.recurso.count-1
     #Codigo region critica
-            do()
-    #Fin Código región critica
-            if self.recurso.count > 0:
-                self.recurso.temp = 0
-                self.recurso.wait.release()
-            else:
-                self.recurso.mutex.release()
+            do()                                # si la concición era VERDADERA ejecuta la zona crítica
+    #Fin Código región critica                  #cuando termina chequea si hay procesos en la cola de eventos
+            if self.recurso.count > 0:          #si hay procesos en la cola de eventos y si no hay ninguno, libera al lock mutex
+                self.recurso.temp = 0           #pone en cero el contador de la lista de eventos
+                self.recurso.wait.release()     #libera el lock de la COLA DE EVENTOS para que uno de los procesos
+            else:                               #que están esperando se despierte
+                self.recurso.mutex.release()    # si no hay ningún proceso esperando en la COLA DE EVENTOS libera el lock mutex 
         return wrapper
